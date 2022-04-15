@@ -16,9 +16,6 @@
 
 .row {
   display: flex;
-
-
-
   justify-content: space-between;
   margin: 40px;
 }
@@ -36,23 +33,58 @@
   height: 5px;
 }
 
-.arrow {
+/*.arrow {
   width: 60px;
-  height: 20px;
-  margin: 10px 0;
-  background: #B74388;
+  height: 60px;
+  border-top: 10px solid #B74388 !important;
+  border-right: 10px solid #B74388 !important;
+  margin: 16px 0 0 10px;
+  transform: rotate(-135deg);
+  display: inline-block;
+  transition: 1s;
+  margin-top: 100px;
+}*/
+
+.arrow {
+  cursor: pointer;
   position: relative;
-  content: "";
+  width: 80px;
+  height: 50px;
+  margin-top: 100px;
 }
-.arrow:after{
-  width: 0;
-  height: 0;
+
+.arrow div {
+  position: relative;
+  top: 20px;
+  width: 90px;
+  height: 10px;
+  background-color: #B74388;
+  box-shadow: 0 3px 5px rgb(0 0 0 / 20%);
+  left: 0;
+  display: block;
+}
+
+.arrow div::before {
+  content: '';
   position: absolute;
-  top: -10px;
-  left: 100%;
-  border-width: 20px 0 20px 40px;
-  border-style: solid;
-  border-color: transparent #B74388;
+  width: 40px;
+  height: 10px;
+  top: 11px;
+  right: 58px;
+  background-color: #B74388;
+  box-shadow: 0 3px 5px rgb(0 0 0 / 20%);
+  transform: rotate(45deg);
+}
+
+.arrow div::after {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 10px;
+  top: -11px;
+  right: 58px;
+  background-color: #B74388;
+  transform: rotate(-45deg);
 }
 
 .ballon {
@@ -61,7 +93,7 @@
   color: #87CEFA;
   border-radius: 100px/50px;
   border: 2px solid #87CEFA;
-  margin: 60px;
+  margin: 70px;
   line-height: 90px;
   padding: 3px;
 }

@@ -1,0 +1,19 @@
+.bolder {
+    border: 4px solid black;
+    min-height: 100vh;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px;
+}
+
+.text {
+    border: 4px solid #12b352;
+    color: #12b352;
+    padding: 5px;
+    max-width: 60vh;
+}

@@ -30,14 +30,6 @@ input:checked ~ p {
     /*display: flex;*/
 }
 
-.text div{
-    order: 1;
-}
-
-.text input{
-    order: 2;
-}
-
 .flex{
     display: flex;
     flex-direction: column;

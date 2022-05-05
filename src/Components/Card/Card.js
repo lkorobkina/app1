@@ -1,18 +1,14 @@
 import './Card.css';
+import './Input.css';
 import {useState} from "react";
 
 export function Card(props){
 
     const [checked, setChecked] = useState(true);
+    const checkboxHandler = () => setChecked(!checked);
 
     function changeCheckbox() {
-        setChecked(!checked);
-        if (checked) {
-            document.getElementById('caption').style.font = "italic small-caps bold 16px/2 cursive";
-        }
-        else {
-            document.getElementById('caption').style.font = "caption";
-        }
+        checkboxHandler();
     }
 
 
@@ -21,7 +17,7 @@ export function Card(props){
 
                 <div className='row'>
                     <input type="checkbox" id="chetyre" onChange={changeCheckbox}/>
-                    <p id="caption">{props.caption}</p>
+                    <p className={'input' + (checked ? ' active' : '')}>{props.caption}</p>
                 </div>
                     <hr/>
                     <p>{props.text}</p>

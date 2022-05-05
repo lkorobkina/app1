@@ -1,0 +1,7 @@
+.input {
+    font: caption;
+}
+
+.input.active {
+    font: italic small-caps bold 16px/2 cursive;
+}

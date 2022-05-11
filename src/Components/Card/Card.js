@@ -8,15 +8,13 @@ export function Card(props){
 
 
     return <div className='bolder'>
-            <div className='text'>
-
-                <div className='row'>
-                    <input type="checkbox" id="chetyre" onChange={checkboxHandler}/>
-                    <p className={'input' + (checked ? ' active' : '')}>{props.caption}</p>
-                </div>
-                    <hr/>
-                    <p>{props.text}</p>
-
+        <div className='text'>
+            <div className='row'>
+                <input type="checkbox" onChange={checkboxHandler}/>
+                <p className={'input' + (checked ? ' active' : '')}>{props.caption}</p>
             </div>
+            <hr/>
+            <p>{props.text}</p>
+        </div>
     </div>
 }

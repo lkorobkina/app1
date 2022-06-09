@@ -1,44 +1,54 @@
 import './Card.css';
-import pencil from './pencil.png';
-import save from './save.png';
-import back from './back.png';
+import { HiOutlineCheck, HiOutlinePencil, HiOutlineX } from 'react-icons/hi';
 import {useState} from "react";
 
-export function Card(props){
+const Card = props => {
 
     const [checked, setChecked] = useState(true);
-    const [isEdit, setIsEdit] = useState(false);
-    const [value1, setValue1] = useState(props.caption);
-    const [value2, setValue2] = useState(props.text);
-    const [showResults, setShowResults] = useState(true);
+    const [isEditMode,setIsEditMode] = useState(false);
+    const [caption, setCaption] = useState(props.caption);
+    const [text, setText] = useState(props.text);
+    const [captionNotChange, setCaptionNGh] = useState(caption);
+    const [textNotChange, setTextNGh] = useState(text);
+    const [isBackMode, setIsBackMode] = useState(false);
 
-    let elem1, elem2;
-    if (!isEdit) {
-        elem1 = <span>{value1}</span>;
-        elem2 = <span>{value2}</span>;
+    let captionValue, textValue;
+
+
+    if (!isEditMode) {
+            captionValue = <span>{caption}</span>;
+            textValue = <span>{text}</span>;
+
     } else {
-
-        elem1 = <input value={value1}
-                       onChange={event => setValue1(event.target.value)}
-                       onBlur={() => setIsEdit(isEdit)}/>;
-        elem2 = <textarea
+        captionValue = <input value={caption}
+                       onChange={event => setCaption(event.target.value)}
+                       onBlur={() => setIsEditMode(isEditMode)}/>;
+        textValue = <textarea
             className='textarea'
-            value={value2}
-            onChange={event => setValue2(event.target.value)}
-            onBlur={() => setIsEdit(isEdit)} />;
+            value={text}
+            onChange={event => setText(event.target.value)}
+            onBlur={() => setIsEditMode(isEditMode)} />;
     }
 
     const checkboxHandler = () => setChecked(!checked);
 
-    const onClick = () => {
-        setShowResults(!showResults);
-        setIsEdit(!isEdit);
-        setChecked(true);
+    const submitHandler = () => {
+        setIsBackMode(!isBackMode);
+        setIsEditMode(!isEditMode);
     }
 
-    const backEdit = () =>{
-        setShowResults(true);
-        setIsEdit(false);
+    const editHandler = () => {
+        setIsEditMode(!isEditMode);
+        setChecked(true);
+        setCaptionNGh(caption);
+        setTextNGh(text);
+    }
+
+    const cancelHandler = () =>{
+        setIsBackMode(true);
+        setIsEditMode(!isEditMode);
+        setCaption(captionNotChange);
+        setText(textNotChange);
     }
 
 
@@ -46,15 +56,25 @@ export function Card(props){
         <div className='text'>
             <div className='row'>
                 <div className='checks'>
-                    { showResults ? <img src={pencil} alt={"pencil"} onClick={onClick}/> : null }
-                    { showResults ? <input id='cb' type="checkbox" onChange={checkboxHandler}/> : null }
-                    { showResults ? null : <img src={back} alt={"back"} onClick={backEdit}/> }
-                    { showResults ? null : <img src={save} alt={"save"} onClick={onClick}/> }
+                    {!isEditMode ? (
+                        <div>
+                            <input id='cb' type="checkbox" onChange={checkboxHandler}/>
+                            <HiOutlinePencil onClick={editHandler}/>
+                        </div>
+                    ) : (
+                        <div>
+                            <HiOutlineCheck onClick={submitHandler}/>
+                            <HiOutlineX onClick={cancelHandler}/>
+                        </div>
+                        )
+                    }
                 </div>
-                <p className={'input' + (checked ? ' active' : '')}>{elem1}</p>
+                <p className={'input' + (checked ? ' active' : '')}>{captionValue}</p>
             </div>
             <hr/>
-            <p>{elem2}</p>
+            <p>{textValue}</p>
         </div>
     </div>
 }
+
+export {Card};

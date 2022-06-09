@@ -51,8 +51,6 @@ img{
 
 .checks{
     padding: 10px;
-    display: flex;
-    flex-direction: row-reverse;
 }
 
 .textarea {

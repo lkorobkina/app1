@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
-import {Card} from './Components/Card/Card.js';
-import {Header} from './Components/Header/Header.js';
+import Card from './Components/Card/Card.js';
+import Header from './Components/Header/Header.js';
 
 class App extends Component {
 
@@ -17,4 +17,4 @@ render() {
   }
 }
 
-export default App
+export default App;

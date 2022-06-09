@@ -1,5 +1,7 @@
 import './Header.css';
 
-export function Header(props){
+const Header = props => {
     return <header className='header'>{props.name}</header>
 }
+
+export default Header;

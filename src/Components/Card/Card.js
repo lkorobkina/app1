@@ -4,77 +4,67 @@ import {useState} from "react";
 
 const Card = props => {
 
-    const [checked, setChecked] = useState(true);
+    const [checked, setChecked] = useState(false);
     const [isEditMode,setIsEditMode] = useState(false);
     const [caption, setCaption] = useState(props.caption);
     const [text, setText] = useState(props.text);
     const [captionNotChange, setCaptionNGh] = useState(caption);
     const [textNotChange, setTextNGh] = useState(text);
-    const [isBackMode, setIsBackMode] = useState(false);
-
-    let captionValue, textValue;
-
-
-    if (!isEditMode) {
-            captionValue = <span>{caption}</span>;
-            textValue = <span>{text}</span>;
-
-    } else {
-        captionValue = <input value={caption}
-                       onChange={event => setCaption(event.target.value)}
-                       onBlur={() => setIsEditMode(isEditMode)}/>;
-        textValue = <textarea
-            className='textarea'
-            value={text}
-            onChange={event => setText(event.target.value)}
-            onBlur={() => setIsEditMode(isEditMode)} />;
-    }
 
     const checkboxHandler = () => setChecked(!checked);
 
     const submitHandler = () => {
-        setIsBackMode(!isBackMode);
-        setIsEditMode(!isEditMode);
-    }
-
-    const editHandler = () => {
-        setIsEditMode(!isEditMode);
-        setChecked(true);
+        setIsEditMode(false);
         setCaptionNGh(caption);
         setTextNGh(text);
     }
 
+    const editHandler = () => {
+        setIsEditMode(true);
+        setChecked(false);
+    }
+
     const cancelHandler = () =>{
-        setIsBackMode(true);
-        setIsEditMode(!isEditMode);
+        setIsEditMode(false);
         setCaption(captionNotChange);
         setText(textNotChange);
     }
 
-
-    return <div className='bolder'>
-        <div className='text'>
-            <div className='row'>
-                <div className='checks'>
-                    {!isEditMode ? (
-                        <div>
+    return (
+        <div className='bolder'>
+            { isEditMode ? (
+                <div className='text'>
+                    <div className='row'>
+                        <div className='checks'>
+                                <HiOutlineCheck onClick={submitHandler}/>
+                                <HiOutlineX onClick={cancelHandler}/>
+                        </div>
+                        <input value={caption}
+                               onChange={event => setCaption(event.target.value)}
+                               onBlur={() => setIsEditMode(isEditMode)}/>
+                    </div>
+                    <hr/>
+                    <textarea
+                        className='textarea'
+                        value={text}
+                        onChange={event => setText(event.target.value)}
+                        onBlur={() => setIsEditMode(isEditMode)} />
+                </div>
+            ) : (
+                <div className='text'>
+                    <div className='row'>
+                        <div className='checks'>
                             <input id='cb' type="checkbox" onChange={checkboxHandler}/>
                             <HiOutlinePencil onClick={editHandler}/>
                         </div>
-                    ) : (
-                        <div>
-                            <HiOutlineCheck onClick={submitHandler}/>
-                            <HiOutlineX onClick={cancelHandler}/>
-                        </div>
-                        )
-                    }
+                        <p className={'input' + (checked ? ' active' : '')}>{caption}</p>
+                    </div>
+                    <hr/>
+                    <p>{text}</p>
                 </div>
-                <p className={'input' + (checked ? ' active' : '')}>{captionValue}</p>
-            </div>
-            <hr/>
-            <p>{textValue}</p>
+            ) }
         </div>
-    </div>
+    );
 }
 
-export {Card};
+export default Card;

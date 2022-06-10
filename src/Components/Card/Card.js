@@ -1,20 +1,70 @@
 import './Card.css';
+import { HiOutlineCheck, HiOutlinePencil, HiOutlineX } from 'react-icons/hi';
 import {useState} from "react";
 
-export function Card(props){
+const Card = props => {
 
-    const [checked, setChecked] = useState(true);
+    const [checked, setChecked] = useState(false);
+    const [isEditMode,setIsEditMode] = useState(false);
+    const [caption, setCaption] = useState(props.caption);
+    const [text, setText] = useState(props.text);
+    const [captionNotChange, setCaptionNGh] = useState(caption);
+    const [textNotChange, setTextNGh] = useState(text);
+
     const checkboxHandler = () => setChecked(!checked);
 
+    const submitHandler = () => {
+        setIsEditMode(false);
+        setCaptionNGh(caption);
+        setTextNGh(text);
+    }
 
-    return <div className='bolder'>
-        <div className='text'>
-            <div className='row'>
-                <input type="checkbox" onChange={checkboxHandler}/>
-                <p className={'input' + (checked ? ' active' : '')}>{props.caption}</p>
-            </div>
-            <hr/>
-            <p>{props.text}</p>
+    const editHandler = () => {
+        setIsEditMode(true);
+        setChecked(false);
+    }
+
+    const cancelHandler = () =>{
+        setIsEditMode(false);
+        setCaption(captionNotChange);
+        setText(textNotChange);
+    }
+
+    return (
+        <div className='bolder'>
+            { isEditMode ? (
+                <div className='text'>
+                    <div className='row'>
+                        <div className='checks'>
+                                <HiOutlineCheck onClick={submitHandler}/>
+                                <HiOutlineX onClick={cancelHandler}/>
+                        </div>
+                        <input value={caption}
+                               onChange={event => setCaption(event.target.value)}
+                        />
+                    </div>
+                    <hr/>
+                    <textarea
+                        className='textarea'
+                        value={text}
+                        onChange={event => setText(event.target.value)}
+                    />
+                </div>
+            ) : (
+                <div className='text'>
+                    <div className='row'>
+                        <div className='checks'>
+                            <input id='cb' type="checkbox" onChange={checkboxHandler}/>
+                            <HiOutlinePencil onClick={editHandler}/>
+                        </div>
+                        <p className={'input' + (checked ? ' active' : '')}>{caption}</p>
+                    </div>
+                    <hr/>
+                    <p>{text}</p>
+                </div>
+            ) }
         </div>
-    </div>
+    );
 }
+
+export default Card;

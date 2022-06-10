@@ -41,14 +41,14 @@ const Card = props => {
                         </div>
                         <input value={caption}
                                onChange={event => setCaption(event.target.value)}
-                               onBlur={() => setIsEditMode(isEditMode)}/>
+                        />
                     </div>
                     <hr/>
                     <textarea
                         className='textarea'
                         value={text}
                         onChange={event => setText(event.target.value)}
-                        onBlur={() => setIsEditMode(isEditMode)} />
+                    />
                 </div>
             ) : (
                 <div className='text'>

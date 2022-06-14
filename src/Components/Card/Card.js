@@ -1,6 +1,6 @@
 import './Card.css';
 import { HiOutlineCheck, HiOutlinePencil, HiOutlineX } from 'react-icons/hi';
-import {useState} from "react";
+import React, {useState} from "react";
 
 const Card = props => {
 
@@ -10,8 +10,16 @@ const Card = props => {
     const [text, setText] = useState(props.text);
     const [captionNotChange, setCaptionNGh] = useState(caption);
     const [textNotChange, setTextNGh] = useState(text);
+    const [watchOnly, setWatchOnly] = useState(false);
 
     const checkboxHandler = () => setChecked(!checked);
+
+    const checkboxWatchOnly = () => {
+        setWatchOnly(!watchOnly);
+        setIsEditMode(false);
+        setCaption(captionNotChange);
+        setText(textNotChange);
+    }
 
     const submitHandler = () => {
         setIsEditMode(false);
@@ -31,7 +39,8 @@ const Card = props => {
     }
 
     return (
-        <div className='bolder'>
+        <div className="main">
+            <input id='cb' type="checkbox" onChange={checkboxWatchOnly}/>Только просмотр
             { isEditMode ? (
                 <div className='text'>
                     <div className='row'>
@@ -55,7 +64,7 @@ const Card = props => {
                     <div className='row'>
                         <div className='checks'>
                             <input id='cb' type="checkbox" onChange={checkboxHandler}/>
-                            <HiOutlinePencil onClick={editHandler}/>
+                            <HiOutlinePencil className={'watchOnly' + (watchOnly ? ' true' : '')} onClick={editHandler}/>
                         </div>
                         <p className={'input' + (checked ? ' active' : '')}>{caption}</p>
                     </div>

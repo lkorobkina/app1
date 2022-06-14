@@ -3,7 +3,6 @@ import { HiOutlineCheck, HiOutlinePencil, HiOutlineX } from 'react-icons/hi';
 import React, {useState} from "react";
 
 const Card = props => {
-
     const [checked, setChecked] = useState(false);
     const [isEditMode,setIsEditMode] = useState(false);
     const [caption, setCaption] = useState(props.caption);

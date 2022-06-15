@@ -1,6 +1,12 @@
 import './Card.css';
 import { HiOutlineCheck, HiOutlinePencil, HiOutlineX } from 'react-icons/hi';
 import React, {useState} from "react";
+import {watchOnly} from "../../List";
+//import {setWatchOnly} from "../../List";
+
+/*export function callWatchOnly(){
+    checkboxWatchOnly();
+}*/
 
 const Card = props => {
     const [checked, setChecked] = useState(false);
@@ -9,12 +15,13 @@ const Card = props => {
     const [text, setText] = useState(props.text);
     const [captionNotChange, setCaptionNGh] = useState(caption);
     const [textNotChange, setTextNGh] = useState(text);
-    const [watchOnly, setWatchOnly] = useState(false);
+    const [watchOnlyCard, setWatchOnly] = useState(watchOnly);
+
 
     const checkboxHandler = () => setChecked(!checked);
 
     const checkboxWatchOnly = () => {
-        setWatchOnly(!watchOnly);
+        setWatchOnly(!watchOnlyCard);
         setIsEditMode(false);
         setCaption(captionNotChange);
         setText(textNotChange);
@@ -39,7 +46,6 @@ const Card = props => {
 
     return (
         <div className="main">
-            <input id='cb' type="checkbox" onChange={checkboxWatchOnly}/>Только просмотр
             { isEditMode ? (
                 <div className='text'>
                     <div className='row'>
@@ -73,6 +79,7 @@ const Card = props => {
             ) }
         </div>
     );
+
 }
 
 export default Card;

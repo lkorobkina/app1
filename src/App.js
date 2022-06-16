@@ -2,7 +2,7 @@ import React, {Component, useState} from 'react';
 import './App.css';
 import Header from './Components/Header/Header.js';
 import List from './List.js';
-import {cards} from "./Components/Data";
+import {cards} from "./Data";
 
 const App = props => {
 

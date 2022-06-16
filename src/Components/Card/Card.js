@@ -1,31 +1,16 @@
 import './Card.css';
-import { HiOutlineCheck, HiOutlinePencil, HiOutlineX } from 'react-icons/hi';
+import {HiOutlineCheck, HiOutlinePencil, HiOutlineX} from 'react-icons/hi';
 import React, {useState} from "react";
-import {watchOnly} from "../../List";
-//import {setWatchOnly} from "../../List";
-
-/*export function callWatchOnly(){
-    checkboxWatchOnly();
-}*/
 
 const Card = props => {
     const [checked, setChecked] = useState(false);
-    const [isEditMode,setIsEditMode] = useState(false);
+    const [isEditMode, setIsEditMode] = useState(props.isEditMode);
     const [caption, setCaption] = useState(props.caption);
     const [text, setText] = useState(props.text);
     const [captionNotChange, setCaptionNGh] = useState(caption);
     const [textNotChange, setTextNGh] = useState(text);
-    const [watchOnlyCard, setWatchOnly] = useState(watchOnly);
-
 
     const checkboxHandler = () => setChecked(!checked);
-
-    const checkboxWatchOnly = () => {
-        setWatchOnly(!watchOnlyCard);
-        setIsEditMode(false);
-        setCaption(captionNotChange);
-        setText(textNotChange);
-    }
 
     const submitHandler = () => {
         setIsEditMode(false);
@@ -38,7 +23,7 @@ const Card = props => {
         setChecked(false);
     }
 
-    const cancelHandler = () =>{
+    const cancelHandler = () => {
         setIsEditMode(false);
         setCaption(captionNotChange);
         setText(textNotChange);
@@ -46,37 +31,41 @@ const Card = props => {
 
     return (
         <div className="main">
-            { isEditMode ? (
-                <div className='text'>
-                    <div className='row'>
-                        <div className='checks'>
+            {isEditMode ? (
+                props.checked ? (
+                        cancelHandler())
+                    :
+                    <div className='text'>
+                        <div className='row'>
+                            <div className='checks'>
                                 <HiOutlineCheck onClick={submitHandler}/>
                                 <HiOutlineX onClick={cancelHandler}/>
+                            </div>
+                            <input value={caption}
+                                   onChange={event => setCaption(event.target.value)}
+                            />
                         </div>
-                        <input value={caption}
-                               onChange={event => setCaption(event.target.value)}
+                        <hr/>
+                        <textarea
+                            className='textarea'
+                            value={text}
+                            onChange={event => setText(event.target.value)}
                         />
                     </div>
-                    <hr/>
-                    <textarea
-                        className='textarea'
-                        value={text}
-                        onChange={event => setText(event.target.value)}
-                    />
-                </div>
             ) : (
                 <div className='text'>
                     <div className='row'>
                         <div className='checks'>
                             <input id='cb' type="checkbox" onChange={checkboxHandler}/>
-                            <HiOutlinePencil className={'watchOnly' + (watchOnly ? ' true' : '')} onClick={editHandler}/>
+                            <HiOutlinePencil className={'watchOnly' + (props.checked ? ' true' : '')}
+                                             onClick={editHandler}/>
                         </div>
                         <p className={'input' + (checked ? ' active' : '')}>{caption}</p>
                     </div>
                     <hr/>
                     <p>{text}</p>
                 </div>
-            ) }
+            )}
         </div>
     );
 

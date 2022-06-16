@@ -1,15 +1,15 @@
 import React, {Component, useState} from 'react';
 import './App.css';
 import Header from './Components/Header/Header.js';
-import List from './List.js';
+import CardList from './Components/CardList/CardList.js';
 import {cards} from "./Data";
 
 const App = props => {
 
-    const [checked, setChecked] = useState(false);
+    const [isDisableMode, setIsDisableMode] = useState(false);
 
     const checkboxWatchOnlyHandler = () => {
-        setChecked(!checked);
+        setIsDisableMode(!isDisableMode);
     }
 
     return (
@@ -19,7 +19,7 @@ const App = props => {
                 <div className="bolder">
                     <input className='cb' type="checkbox" onChange={checkboxWatchOnlyHandler}/>Только просмотр
                     <div className="cards">
-                        <List items={cards} checked={checked}/>
+                        <CardList items={cards} isDisableMode={isDisableMode}/>
                     </div>
                 </div>
             </div>

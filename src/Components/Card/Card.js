@@ -1,10 +1,10 @@
 import './Card.css';
 import {HiOutlineCheck, HiOutlinePencil, HiOutlineX} from 'react-icons/hi';
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 const Card = props => {
     const [checked, setChecked] = useState(false);
-    const [isEditMode, setIsEditMode] = useState(props.isEditMode);
+    const [isEditMode, setIsEditMode] = useState(false);
     const [caption, setCaption] = useState(props.caption);
     const [text, setText] = useState(props.text);
     const [captionNotChange, setCaptionNGh] = useState(caption);
@@ -29,12 +29,15 @@ const Card = props => {
         setText(textNotChange);
     }
 
+    useEffect(() => {
+        if (props.isDisableMode) {
+            cancelHandler()
+        }
+    }, [props.isDisableMode]);
+
     return (
         <div className="main">
             {isEditMode ? (
-                props.checked ? (
-                        cancelHandler())
-                    :
                     <div className='text'>
                         <div className='row'>
                             <div className='checks'>
@@ -57,8 +60,12 @@ const Card = props => {
                     <div className='row'>
                         <div className='checks'>
                             <input id='cb' type="checkbox" onChange={checkboxHandler}/>
-                            <HiOutlinePencil className={'watchOnly' + (props.checked ? ' true' : '')}
-                                             onClick={editHandler}/>
+                            {/*<HiOutlinePencil className={'watchOnly' + (props.isDisableMode ? ' true' : '')}
+                                             onClick={editHandler}/>*/}
+                            {!props.isDisableMode ? (
+                                <HiOutlinePencil onClick={editHandler}/>
+                            ) : ''
+                            }
                         </div>
                         <p className={'input' + (checked ? ' active' : '')}>{caption}</p>
                     </div>

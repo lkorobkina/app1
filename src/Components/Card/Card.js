@@ -1,11 +1,10 @@
 import './Card.css';
-import { HiOutlineCheck, HiOutlinePencil, HiOutlineX } from 'react-icons/hi';
-import {useState} from "react";
+import {HiOutlineCheck, HiOutlinePencil, HiOutlineX} from 'react-icons/hi';
+import React, {useEffect, useState} from "react";
 
 const Card = props => {
-
     const [checked, setChecked] = useState(false);
-    const [isEditMode,setIsEditMode] = useState(false);
+    const [isEditMode, setIsEditMode] = useState(false);
     const [caption, setCaption] = useState(props.caption);
     const [text, setText] = useState(props.text);
     const [captionNotChange, setCaptionNGh] = useState(caption);
@@ -24,20 +23,24 @@ const Card = props => {
         setChecked(false);
     }
 
-    const cancelHandler = () =>{
+    const cancelHandler = () => {
         setIsEditMode(false);
         setCaption(captionNotChange);
         setText(textNotChange);
     }
 
+    useEffect(() => {
+        cancelHandler()
+    }, [props.isDisableMode]);
+
     return (
-        <div className='bolder'>
-            { isEditMode ? (
+        <div className="main">
+            {isEditMode ? (
                 <div className='text'>
                     <div className='row'>
                         <div className='checks'>
-                                <HiOutlineCheck onClick={submitHandler}/>
-                                <HiOutlineX onClick={cancelHandler}/>
+                            <HiOutlineCheck onClick={submitHandler}/>
+                            <HiOutlineX onClick={cancelHandler}/>
                         </div>
                         <input value={caption}
                                onChange={event => setCaption(event.target.value)}
@@ -55,16 +58,22 @@ const Card = props => {
                     <div className='row'>
                         <div className='checks'>
                             <input id='cb' type="checkbox" onChange={checkboxHandler}/>
-                            <HiOutlinePencil onClick={editHandler}/>
+                            {/*<HiOutlinePencil className={'watchOnly' + (props.isDisableMode ? ' true' : '')}
+                                             onClick={editHandler}/>*/}
+                            {!props.isDisableMode ? (
+                                <HiOutlinePencil onClick={editHandler}/>
+                            ) : ''
+                            }
                         </div>
                         <p className={'input' + (checked ? ' active' : '')}>{caption}</p>
                     </div>
                     <hr/>
                     <p>{text}</p>
                 </div>
-            ) }
+            )}
         </div>
     );
+
 }
 
 export default Card;

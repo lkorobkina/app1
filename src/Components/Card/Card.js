@@ -30,31 +30,29 @@ const Card = props => {
     }
 
     useEffect(() => {
-        if (props.isDisableMode) {
-            cancelHandler()
-        }
+        cancelHandler()
     }, [props.isDisableMode]);
 
     return (
         <div className="main">
             {isEditMode ? (
-                    <div className='text'>
-                        <div className='row'>
-                            <div className='checks'>
-                                <HiOutlineCheck onClick={submitHandler}/>
-                                <HiOutlineX onClick={cancelHandler}/>
-                            </div>
-                            <input value={caption}
-                                   onChange={event => setCaption(event.target.value)}
-                            />
+                <div className='text'>
+                    <div className='row'>
+                        <div className='checks'>
+                            <HiOutlineCheck onClick={submitHandler}/>
+                            <HiOutlineX onClick={cancelHandler}/>
                         </div>
-                        <hr/>
-                        <textarea
-                            className='textarea'
-                            value={text}
-                            onChange={event => setText(event.target.value)}
+                        <input value={caption}
+                               onChange={event => setCaption(event.target.value)}
                         />
                     </div>
+                    <hr/>
+                    <textarea
+                        className='textarea'
+                        value={text}
+                        onChange={event => setText(event.target.value)}
+                    />
+                </div>
             ) : (
                 <div className='text'>
                     <div className='row'>

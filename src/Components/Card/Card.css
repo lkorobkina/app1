@@ -25,6 +25,7 @@
     min-height: 50vh;
     max-height: 50vh;
     overflow-y: auto;
+    margin: 10px;
 }
 
 .flex{
@@ -53,12 +54,4 @@ img{
 .textarea {
     width: 90%;
     height: 180px;
-}
-
-.watchOnly{
-    visibility: visible;
-}
-
-.watchOnly.true{
-    visibility: hidden;
 }

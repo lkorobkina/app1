@@ -1,33 +1,23 @@
 import './Card.css';
-import React, {useContext, useEffect, useState} from "react";
+import React from "react";
 
-const CardBody = props => {
-    const [text, setText] = useState(props.text);
-    const [textNotChange,setTextNGh] = useState(text);
-
-    const cancelHandler = () => {
-        setText(textNotChange);
-    }
-
-    useEffect(() => {
-        cancelHandler()
-    }, [props.isDisableMode]);
+const CardBody = ({value, isEditMode, onChange}) => {
 
     return (
-        <div className="main">
-            {props.isEditMode ? (
+        <div>
+            {isEditMode ? (
                 <div >
                     <hr/>
                     <textarea
                         className='textarea'
-                        value={text}
-                        onChange={event => setText(event.target.value)}
+                        value={value}
+                        onChange={onChange}
                     />
                 </div>
             ) : (
                 <div>
                     <hr/>
-                    <p>{text}</p>
+                    <p>{value}</p>
                 </div>
             )}
         </div>

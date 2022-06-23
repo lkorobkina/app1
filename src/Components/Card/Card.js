@@ -12,6 +12,8 @@ const Card = props => {
     const [captionNotChange, setCaptionNGh] = useState(caption);
     const [textNotChange, setTextNGh] = useState(text);
 
+    const [isDelete, setIsDelete] = useState(false);
+
     const checkboxHandler = () => setChecked(!checked);
 
     const submitHandler = () => {
@@ -36,49 +38,44 @@ const Card = props => {
         cancelHandler()
     }, [props.isDisableMode]);
 
-    return (
-        <div className="main">
-            {isEditMode ? (
-                <div className='text'>
-                    <div className='row'>
-                        <CardHeader caption={caption} isEditMode={isEditMode} isDisableMode={props.isDisableMode}/>
-                        <div className='checks'>
-                            <HiOutlineCheck onClick={submitHandler}/>
-                            <HiOutlineX onClick={cancelHandler}/>
-                        </div>
-                        {/*<input value={caption}*/}
-                        {/*       onChange={event => setCaption(event.target.value)}*/}
-                        {/*/>*/}
-                    </div>
-                    {/*<hr/>*/}
-                    {/*<textarea*/}
-                    {/*    className='textarea'*/}
-                    {/*    value={text}*/}
-                    {/*    onChange={event => setText(event.target.value)}*/}
-                    {/*/>*/}
 
-                    <CardBody text={text} isEditMode={isEditMode} isDisableMode={props.isDisableMode}/>
-                </div>
-            ) : (
-                <div className='text'>
-                    <div className='row'>
-                        <CardHeader caption={caption} isEditMode={isEditMode} checked={checked} isDisableMode={props.isDisableMode}/>
-                        <div className='checks'>
-                            <input id='cb' type="checkbox" onChange={checkboxHandler}/>
-                            {!props.isDisableMode ? (
-                                <HiOutlinePencil onClick={editHandler}/>
-                            ) : ''
-                            }
+    if (props.isDeleteMode && isDelete) {
+        return null;
+    } else {
+        return (
+            <div className="main">
+                <input type="checkbox" onChange={() => setIsDelete(!isDelete)}/>
+                {isEditMode ? (
+                    <div className='text'>
+                        <div className='row'>
+                            <CardHeader value={caption} isEditMode={isEditMode}
+                                        onChange={event => setCaption(event.target.value)}/>
+                            <div className='checks'>
+                                <HiOutlineCheck onClick={submitHandler}/>
+                                <HiOutlineX onClick={cancelHandler}/>
+                            </div>
                         </div>
-                        {/*<p className={'input' + (checked ? ' active' : '')}>{caption}</p>*/}
+                        <CardBody value={text} isEditMode={isEditMode} onChange={event => setText(event.target.value)}/>
                     </div>
-                    {/*<hr/>*/}
-                    {/*<p>{text}</p>*/}
-                    <CardBody text={text} isEditMode={isEditMode} isDisableMode={props.isDisableMode}/>
-                </div>
-            )}
-        </div>
-    );
+                ) : (
+                    <div className='text'>
+                        <div className='row'>
+                            <CardHeader value={caption} isEditMode={isEditMode} checked={checked}
+                                        onChange={event => setCaption(event.target.value)}/>
+                            <div className='checks'>
+                                <input id='cb' type="checkbox" onChange={checkboxHandler}/>
+                                {!props.isDisableMode ? (
+                                    <HiOutlinePencil onClick={editHandler}/>
+                                ) : ''
+                                }
+                            </div>
+                        </div>
+                        <CardBody value={text} isEditMode={isEditMode} onChange={event => setText(event.target.value)}/>
+                    </div>
+                )}
+            </div>
+        );
+    }
 
 }
 

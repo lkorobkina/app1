@@ -1,29 +1,19 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import './Card.css';
 
-const CardHeader = props => {
-    const [caption, setCaption] = useState(props.caption);
-    const [captionNotChange, setCaptionNGh] = useState(caption);
-
-    const cancelHandler = () => {
-        setCaption(captionNotChange);
-    }
-
-    useEffect(() => {
-        cancelHandler()
-    }, [props.isDisableMode]);
+const CardHeader = ({value, isEditMode, onChange, checked}) => {
 
     return (
-        <div className="main">
-            {props.isEditMode ? (
+        <div>
+            {isEditMode ? (
                 <div >
-                        <input value={caption}
-                               onChange={event => setCaption(event.target.value)}
+                        <input value={value}
+                               onChange={onChange}
                         />
                 </div>
             ) : (
                 <div>
-                        <p className={'input' + (props.checked ? ' active' : '')}>{caption}</p>
+                        <p className={'input' + (checked ? ' active' : '')}>{value}</p>
                 </div>
             )}
         </div>

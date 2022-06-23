@@ -1,5 +1,6 @@
-body {
+main {
     background-color: white;
+    margin: 10px;
 }
 
 .bolder {
@@ -10,8 +11,6 @@ body {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
+    padding: 20px;
 }
 
-.cards {
-    margin-bottom: 1000px;
-}

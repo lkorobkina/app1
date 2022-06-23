@@ -8,9 +8,14 @@ import styled from "styled-components";
 const App = props => {
 
     const [isDisableMode, setIsDisableMode] = useState(false);
+    const [isDeleteMode, setIsDeleteMode] = useState(false);
 
     const checkboxWatchOnlyHandler = () => {
         setIsDisableMode(!isDisableMode);
+    }
+
+    const buttonDelete = () => {
+        setIsDeleteMode(true);
     }
 
     return (
@@ -28,8 +33,9 @@ const App = props => {
                         <label>Только просмотр</label>
                     </Styled>
                     <div className="cards">
-                        <CardList items={cards} isDisableMode={isDisableMode}/>
+                        <CardList items={cards} isDisableMode={isDisableMode} isDeleteMode={isDeleteMode}/>
                     </div>
+                    <button onClick={buttonDelete}>Удалить выбранные карточки</button>
                 </div>
             </div>
         </main>

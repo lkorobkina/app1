@@ -1,5 +1,6 @@
 .main {
     margin: 10px;
+    display: flex;
 }
 
 .row {
@@ -52,6 +53,6 @@ img{
 }
 
 .textarea {
-    width: 90%;
+    width: 80%;
     height: 180px;
 }

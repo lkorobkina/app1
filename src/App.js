@@ -23,6 +23,7 @@ const App = props => {
             <div>
                 <Header name="HEADER"/>
                 <div className="bolder">
+                    <button onClick={buttonDelete}>Удалить выбранные карточки</button>
                     <Styled
                         onClick={() => checkboxWatchOnlyHandler()}
                     >
@@ -35,7 +36,6 @@ const App = props => {
                     <div className="cards">
                         <CardList items={cards} isDisableMode={isDisableMode} isDeleteMode={isDeleteMode}/>
                     </div>
-                    <button onClick={buttonDelete}>Удалить выбранные карточки</button>
                 </div>
             </div>
         </main>

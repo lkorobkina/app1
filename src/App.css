@@ -3,14 +3,23 @@ main {
     margin: 10px;
 }
 
-.bolder {
+.bolder{
     border: 4px solid black;
     min-height: 100vh;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.cards {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
     padding: 20px;
 }
+
+button {
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
 

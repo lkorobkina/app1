@@ -29,6 +29,10 @@
     margin: 10px;
 }
 
+.text.hide {
+    display: none;
+}
+
 .flex{
     display: flex;
     flex-direction: column;

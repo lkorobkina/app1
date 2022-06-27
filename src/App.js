@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import './App.css';
 import Header from './Components/Header/Header.js';
 import CardList from './Components/CardList/CardList.js';
@@ -10,12 +10,10 @@ const App = props => {
     const [isDisableMode, setIsDisableMode] = useState(false);
     const [isDeleteMode, setIsDeleteMode] = useState(false);
 
+    const [data, setData] = useState(cards);
+
     const checkboxWatchOnlyHandler = () => {
         setIsDisableMode(!isDisableMode);
-    }
-
-    const buttonDelete = () => {
-        setIsDeleteMode(true);
     }
 
     return (
@@ -23,7 +21,7 @@ const App = props => {
             <div>
                 <Header name="HEADER"/>
                 <div className="bolder">
-                    <button onClick={buttonDelete}>Удалить выбранные карточки</button>
+                    <button onClick={() => setData(cards.filter(card => card.isActive === false))}>Удалить выбранные карточки</button>
                     <Styled
                         onClick={() => checkboxWatchOnlyHandler()}
                     >
@@ -34,7 +32,7 @@ const App = props => {
                         <label>Только просмотр</label>
                     </Styled>
                     <div className="cards">
-                        <CardList items={cards} isDisableMode={isDisableMode} isDeleteMode={isDeleteMode}/>
+                        <CardList items={data} isDisableMode={isDisableMode}/>
                     </div>
                 </div>
             </div>

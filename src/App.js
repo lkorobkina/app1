@@ -8,21 +8,19 @@ import styled from "styled-components";
 const App = props => {
 
     const [isDisableMode, setIsDisableMode] = useState(false);
-    const [isDeleteMode, setIsDeleteMode] = useState(false);
 
     const [data, setData] = useState(cards);
 
-    const isActiveHandler = (id) => {
-        let updatedList = data.map(item =>
-        {
-            if (item.id == id){
-                item.isActive = true;
+    const changeActiveHandler = id =>
+        setData(data => data.map(card => {
+            if (card.id === id) {
+                const prev = {...card};
+                prev.isActive = !card.isActive;
+                return prev;
             }
-            return item;
-        });
 
-        setData(updatedList);
-    }
+            return card;
+        }));
 
     const checkboxWatchOnlyHandler = () => {
         setIsDisableMode(!isDisableMode);
@@ -46,7 +44,7 @@ const App = props => {
                         <label>Только просмотр</label>
                     </Styled>
                     <div className="cards">
-                        <CardList items={data} isDisableMode={isDisableMode} isActiveHandler={isActiveHandler}/>
+                        <CardList items={data} isDisableMode={isDisableMode} changeActiveHandler={changeActiveHandler}/>
                     </div>
                 </div>
             </div>

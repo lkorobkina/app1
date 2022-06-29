@@ -14,7 +14,7 @@ const Card = props => {
 
     const checkboxHandler = () => {
         setChecked(!checked);
-        props.isActiveHandler(props.id);
+        props.changeActiveHandler(props.id);
     }
 
     const submitHandler = () => {

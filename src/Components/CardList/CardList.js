@@ -6,7 +6,7 @@ import './CardList.css';
 const CardList = props => {
     return (
         <div className="cards">
-            {props.items.map(cards => <Card caption={cards.caption} text={cards.text} isDisableMode={props.isDisableMode} id={cards.id}/>)}
+            {props.items.map(card => <Card caption={card.caption} text={card.text} isDisableMode={props.isDisableMode} id={card.id} isActiveHandler={props.isActiveHandler}/>)}
         </div>
     );
 }

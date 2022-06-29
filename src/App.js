@@ -12,6 +12,18 @@ const App = props => {
 
     const [data, setData] = useState(cards);
 
+    const isActiveHandler = (id) => {
+        let updatedList = data.map(item =>
+        {
+            if (item.id == id){
+                item.isActive = true;
+            }
+            return item;
+        });
+
+        setData(updatedList);
+    }
+
     const checkboxWatchOnlyHandler = () => {
         setIsDisableMode(!isDisableMode);
     }
@@ -21,7 +33,9 @@ const App = props => {
             <div>
                 <Header name="HEADER"/>
                 <div className="bolder">
-                    <button onClick={() => setData(cards.filter(card => card.isActive === false))}>Удалить выбранные карточки</button>
+                    <button onClick={() => setData(data.filter(card => card.isActive === false))}>Удалить выбранные
+                        карточки
+                    </button>
                     <Styled
                         onClick={() => checkboxWatchOnlyHandler()}
                     >
@@ -32,7 +46,7 @@ const App = props => {
                         <label>Только просмотр</label>
                     </Styled>
                     <div className="cards">
-                        <CardList items={data} isDisableMode={isDisableMode}/>
+                        <CardList items={data} isDisableMode={isDisableMode} isActiveHandler={isActiveHandler}/>
                     </div>
                 </div>
             </div>

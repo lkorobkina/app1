@@ -4,7 +4,6 @@ import React, {useEffect, useState} from "react";
 import CardHeader from "./CardHeader";
 import CardBody from "./CardBody";
 
-
 const Card = props => {
     const [checked, setChecked] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
@@ -15,6 +14,7 @@ const Card = props => {
 
     const checkboxHandler = () => {
         setChecked(!checked);
+        props.isActiveHandler(props.id);
     }
 
     const submitHandler = () => {
@@ -37,6 +37,7 @@ const Card = props => {
     useEffect(() => {
         cancelHandler()
     }, [props.isDisableMode]);
+
 
     return (
         <div className="main">

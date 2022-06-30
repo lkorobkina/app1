@@ -3,10 +3,10 @@ import Card from "../Card/Card";
 import './CardList.css';
 
 
-const CardList = props => {
+const CardList = ({items, isDisableMode, changeActiveHandler}) => {
     return (
         <div className="cards">
-            {props.items.map(card => <Card key={card.id} caption={card.caption} text={card.text} isDisableMode={props.isDisableMode} id={card.id} changeActiveHandler={props.changeActiveHandler}/>)}
+            {items.map(card => <Card key={card.id} cardCaption={card.caption} cardText={card.text} isDisableMode={isDisableMode} id={card.id} changeActiveHandler={changeActiveHandler} isActive={card.isActive}/>)}
         </div>
     );
 }

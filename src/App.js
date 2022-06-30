@@ -11,11 +11,11 @@ const App = props => {
 
     const [data, setData] = useState(cards);
 
-    const changeActiveHandler = id =>
+    const changeActiveHandler = (id, bool = false) =>
         setData(data => data.map(card => {
             if (card.id === id) {
                 const prev = {...card};
-                prev.isActive = !card.isActive;
+                prev.isActive = bool;
                 return prev;
             }
 
@@ -26,12 +26,16 @@ const App = props => {
         setIsDisableMode(!isDisableMode);
     }
 
+    const filterHandler = () => {
+        setData(data.filter(card => !card.isActive))
+    }
+
     return (
         <main>
             <div>
                 <Header name="HEADER"/>
                 <div className="bolder">
-                    <button onClick={() => setData(data.filter(card => card.isActive === false))}>Удалить выбранные
+                    <button onClick={filterHandler}>Удалить выбранные
                         карточки
                     </button>
                     <Styled

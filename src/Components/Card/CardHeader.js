@@ -1,19 +1,34 @@
 import React from "react";
 import './Card.css';
+import {HiOutlineCheck, HiOutlinePencil, HiOutlineX} from "react-icons/hi";
 
-const CardHeader = ({value, isEditMode, onChange, checked}) => {
+const CardHeader = ({
+                        value, isEditMode, onChange, isActive, submitHandler,
+                        cancelHandler, checkboxHandler, isDisableMode, editHandler
+                    }) => {
 
     return (
         <div>
             {isEditMode ? (
-                <div >
-                        <input value={value}
-                               onChange={onChange}
-                        />
+                <div className='row'>
+                    <input value={value}
+                           onChange={onChange}
+                    />
+                    <div className='checks'>
+                        <HiOutlineCheck onClick={submitHandler}/>
+                        <HiOutlineX onClick={cancelHandler}/>
+                    </div>
                 </div>
             ) : (
-                <div>
-                        <p className={'input' + (checked ? ' active' : '')}>{value}</p>
+                <div className='row'>
+                    <p className={'input' + (isActive ? ' active' : '')}>{value}</p>
+                    <div className='checks'>
+                        <input id='cb' type="checkbox" onChange={checkboxHandler}/>
+                        {!isDisableMode ? (
+                            <HiOutlinePencil onClick={editHandler}/>
+                        ) : ''
+                        }
+                    </div>
                 </div>
             )}
         </div>

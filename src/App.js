@@ -11,11 +11,11 @@ const App = props => {
 
     const [data, setData] = useState(cards);
 
-    const changeActiveHandler = (id, bool = false) =>
+    const changeActiveHandler = (id) =>
         setData(data => data.map(card => {
             if (card.id === id) {
                 const prev = {...card};
-                prev.isActive = bool;
+                prev.isActive = !card.isActive;
                 return prev;
             }
 
@@ -44,6 +44,7 @@ const App = props => {
                         <input
                             type="checkbox"
                             checked={isDisableMode}
+                            onChange={() => checkboxWatchOnlyHandler()}
                         />
                         <label>Только просмотр</label>
                     </Styled>

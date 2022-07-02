@@ -3,8 +3,8 @@ import './Card.css';
 import {HiOutlineCheck, HiOutlinePencil, HiOutlineX} from "react-icons/hi";
 
 const CardHeader = ({
-                        value, isEditMode, onChange, isActive, submitHandler,
-                        cancelHandler, checkboxHandler, isDisableMode, editHandler
+                        id, value, isEditMode, onChange, isActive, submitHandler,
+                        cancelHandler, changeActiveHandler, isDisableMode, editHandler
                     }) => {
 
     return (
@@ -23,7 +23,7 @@ const CardHeader = ({
                 <div className='row'>
                     <p className={'input' + (isActive ? ' active' : '')}>{value}</p>
                     <div className='checks'>
-                        <input id='cb' type="checkbox" onChange={checkboxHandler}/>
+                        <input id='cb' type="checkbox" checked={isActive} onChange={() => changeActiveHandler(id)}/>
                         {!isDisableMode ? (
                             <HiOutlinePencil onClick={editHandler}/>
                         ) : ''

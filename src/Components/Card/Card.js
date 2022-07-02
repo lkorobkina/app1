@@ -10,10 +10,6 @@ const Card = ({id, isDisableMode, isActive, cardCaption, cardText, changeActiveH
     const [captionNotChange, setCaptionNGh] = useState(caption);
     const [textNotChange, setTextNGh] = useState(text);
 
-    const checkboxHandler = () => {
-        changeActiveHandler(id, !isActive);
-    }
-
     const submitHandler = () => {
         setIsEditMode(false);
         setCaptionNGh(caption);
@@ -22,7 +18,8 @@ const Card = ({id, isDisableMode, isActive, cardCaption, cardText, changeActiveH
 
     const editHandler = () => {
         setIsEditMode(true);
-        changeActiveHandler(id, false);
+        if (isActive)
+            changeActiveHandler(id);
     }
 
     const cancelHandler = () => {
@@ -38,10 +35,10 @@ const Card = ({id, isDisableMode, isActive, cardCaption, cardText, changeActiveH
     return (
         <div className="main">
             <div className='text'>
-                    <CardHeader value={caption} isEditMode={isEditMode} isActive={isActive}
+                    <CardHeader id={id} value={caption} isEditMode={isEditMode} isActive={isActive}
                                 onChange={event => setCaption(event.target.value)}
                                 cancelHandler={cancelHandler} submitHandler={submitHandler}
-                                checkboxHandler={checkboxHandler} isDisableMode={isDisableMode} editHandler={editHandler}/>
+                                changeActiveHandler={changeActiveHandler} isDisableMode={isDisableMode} editHandler={editHandler}/>
                     <CardBody value={text} isEditMode={isEditMode}
                               onChange={event => setText(event.target.value)}/>
             </div>

@@ -2,11 +2,11 @@ import React, {useState} from "react";
 import Card from "../Card/Card";
 import './CardList.css';
 
-const CardList = props => {
 
+const CardList = ({items, isDisableMode, changeActiveHandler}) => {
     return (
         <div className="cards">
-            {props.items.map(cards => <Card caption={cards.caption} text={cards.text} isDisableMode={props.isDisableMode}/>)}
+            {items.map(card => <Card key={card.id} cardCaption={card.caption} cardText={card.text} isDisableMode={isDisableMode} id={card.id} changeActiveHandler={changeActiveHandler} isActive={card.isActive}/>)}
         </div>
     );
 }

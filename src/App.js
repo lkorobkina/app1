@@ -4,6 +4,8 @@ import Header from './Components/Header/Header.js';
 import CardList from './Components/CardList/CardList.js';
 import {cards} from "./Data";
 import styled from "styled-components";
+import Card from "./Components/Card/Card";
+import { v4 as uuidv4 } from 'uuid';
 
 const App = props => {
 
@@ -30,14 +32,22 @@ const App = props => {
         setData(data.filter(card => !card.isActive))
     }
 
+    const createHandler = () => {
+        let copy = Object.assign([], data);
+        copy.push({id: uuidv4(), caption: "", text: "", isActive: false});
+        setData(copy);
+    }
+
     return (
         <main>
             <div>
                 <Header name="HEADER"/>
                 <div className="bolder">
-                    <button onClick={filterHandler}>Удалить выбранные
+                    <Button onClick={createHandler}>Создать карточку
+                    </Button>
+                    <Button onClick={filterHandler}>Удалить выбранные
                         карточки
-                    </button>
+                    </Button>
                     <CheckboxContainer>
                         <Checkbox onClick={checkboxWatchOnlyHandler} />
                         <label className='read-only__label' htmlFor='read-only'>Только просмотр</label>
@@ -72,4 +82,11 @@ const Checkbox = styled.input.attrs({type: 'checkbox', id: 'read-only'})`
     &:checked ~ .read-only__label {
         color: #12b352;
     }
+`;
+
+const Button = styled.button`
+  background: transparent;
+  border-radius: 3px;
+  padding: 2px;
+  border-color: darkgrey;
 `;

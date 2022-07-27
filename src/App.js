@@ -1,10 +1,9 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import Header from './Components/Header/Header.js';
 import CardList from './Components/CardList/CardList.js';
 import {cards} from "./Data";
 import styled from "styled-components";
-import Card from "./Components/Card/Card";
 import { v4 as uuidv4 } from 'uuid';
 
 const App = props => {
@@ -20,7 +19,6 @@ const App = props => {
                 prev.isActive = !card.isActive;
                 return prev;
             }
-
             return card;
         }));
 
@@ -34,9 +32,19 @@ const App = props => {
 
     const createHandler = () => {
         let copy = Object.assign([], data);
-        copy.push({id: uuidv4(), caption: "", text: "", isActive: false});
+        copy.push({id: uuidv4(), caption: "", text: "", isActive: false, isLoading: false});
         setData(copy);
     }
+
+    const changeLoadingHandler = (id) =>
+        setData(data => data.map(card => {
+            if (card.id === id) {
+                const prev = {...card};
+                prev.isLoading = true;
+                return prev;
+            }
+            return card;
+        }));
 
     return (
         <main>
@@ -53,7 +61,7 @@ const App = props => {
                         <label className='read-only__label' htmlFor='read-only'>Только просмотр</label>
                     </CheckboxContainer>
                     <div className="cards">
-                        <CardList items={data} isDisableMode={isDisableMode} changeActiveHandler={changeActiveHandler}/>
+                        <CardList items={data} isDisableMode={isDisableMode} changeActiveHandler={changeActiveHandler} changeLoadingHandler={changeLoadingHandler}/>
                     </div>
                 </div>
             </div>

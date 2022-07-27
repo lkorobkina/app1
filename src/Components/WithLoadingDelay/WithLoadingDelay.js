@@ -1,26 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import Spinner from "../Spinner/Spinner";
 
-const WithLoadingDelay = (Component) => {
-    const [loading, setLoading] = useState(true);
+const WithLoadingDelay = Component => {
+    return props => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        if (loading) {
-            setTimeout(() => {
-                setLoading(false);
-            }, 2000);
-        }
-    }, [loading]);
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        useEffect(() => {
+            setTimeout(() => setLoading(false), 2000);
+        }, []);
 
 
-    return class extends React.Component {
-        render() {
-            return (
-                <div>
-                    {loading ? <Spinner/> : <Component {...this.props} />}
-                </div>
-            );
-        }
+        return loading ? <Spinner/> : <Component {...props} />;
     }
 }
 

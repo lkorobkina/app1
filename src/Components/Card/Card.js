@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import CardHeader from "./CardHeader";
 import CardBody from "./CardBody";
 
-const Card = ({id, isDisableMode, isActive, cardCaption, cardText, changeActiveHandler}) => {
+const Card = ({id, isDisableMode, isActive, cardCaption, cardText, isLoading, changeLoadingHandler, changeActiveHandler}) => {
     const [isEditMode, setIsEditMode] = useState(false);
     const [caption, setCaption] = useState(cardCaption);
     const [text, setText] = useState(cardText);
@@ -31,6 +31,10 @@ const Card = ({id, isDisableMode, isActive, cardCaption, cardText, changeActiveH
     useEffect(() => {
         cancelHandler()
     }, [isDisableMode]);
+
+    useEffect(() => {
+        changeLoadingHandler(id);
+    },[]);
 
     return (
         <div className="main">
